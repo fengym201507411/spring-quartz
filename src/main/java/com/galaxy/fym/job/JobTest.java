@@ -23,10 +23,10 @@ public class JobTest {
     }
 
     public void jobPrint() throws Exception{
-        //System.out.println("--------Job1111Test jobPrint11111 thread time：" + new Date().getTime() + "-------------");
+        System.out.println("--------Job1111Test jobPrint11111 thread time：" + new Date().getTime() + "-------------");
     }
 
     public void jobPrint2(){
-        //System.out.println("--------Job1111Test jobPrint22222 time：" + new Date().getTime()+"-------------");
+        System.out.println("--------Job1111Test jobPrint22222 time：" + new Date().getTime()+"-------------");
     }
 }
