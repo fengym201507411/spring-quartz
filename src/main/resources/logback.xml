@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <!-- 日志存放路径 -->
+    <property name="LOG_PATH" value="./log" />
+
+    <!-- error的日志 -->
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/all_error.log</File>
+        <!-- 所有ERROR级别的日志文件打印在一个文件里 过滤器只会过滤对应的日志 -->
+        <!--过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。返回DENY，日志将立即被抛弃不再经过其他过滤器；返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。
+        过滤器被添加到<Appender> 中，为<Appender> 添加一个或多个过滤器后，可以用任意条件对日志进行过滤。<Appender> 有多个过滤器时，按照配置顺序执行-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/all_error.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>5</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- common下的类打印日志 -->
+    <appender name="commonLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/common.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/common.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>5</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- front下的类打印日志 -->
+    <appender name="frontLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/front.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/front.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- job下的类打印日志 -->
+    <appender name="jobLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/job.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/job.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- remote下的类打印日志 -->
+    <appender name="remoteLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/remote.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/remote.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- service下的类打印日志 -->
+    <appender name="serviceLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/service.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/service.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- 支付日志 -->
+    <appender name="payLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件 -->
+        <File>${LOG_PATH}/pay.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <!-- 超过文件大小会自动分成多个文件保存 数值越小时间越早-->
+            <FileNamePattern>${LOG_PATH}/pay.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <!-- 每份日志文件的大小 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 输出日志的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd hh:mm:ss.SSS}:[%thread] %-5level %logger{36} : %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.galaxy.fym.common" level="ERROR">
+        <appender-ref ref="commonLog"/>
+    </logger>
+    <logger name="com.galaxy.fym.front" level="ERROR">
+        <appender-ref ref="frontLog"/>
+    </logger>
+    <logger name="com.galaxy.fym.job" level="INFO">
+        <appender-ref ref="jobLog"/>
+    </logger>
+    <logger name="com.galaxy.fym.remote" level="INFO">
+        <appender-ref ref="remoteLog"/>
+    </logger>
+    <logger name="com.galaxy.fym.service" level="INFO">
+        <appender-ref ref="serviceLog"/>
+    </logger>
+    <logger name="com.galaxy.fym.pay.Pay" level="INFO">
+        <appender-ref ref="payLog"/>
+    </logger>
+
+    <!-- 框架的输出 -->
+    <!--<logger name="org.springframework.core" value="ERROR" />
+    <logger name="org.springframework.beans" value="ERROR" />
+    <logger name="org.springframework.context" value="ERROR" />
+    <logger name="org.springframework.web" value="ERROR" />
+    <logger name="org.apache.zookeeper" value="ERROR" />-->
+
+    <!-- 对所有的class文件都会起效果 -->
+    <root>
+        <appender-ref ref="errorLog"/>
+    </root>
+</configuration>

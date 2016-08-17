@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- job 的包 加载定时任务实现类-->
+    <context:component-scan base-package="com.galaxy.fym.job"></context:component-scan>
+    <!-- 任务调度器配置 配置任务线性池 pool-size
+    指配的一个scheduled-tasks中所有的运行方法的线程总数
+    不同的scheduled-tasks配置了相同的task:scheduler会有相同的总数限制，而不是和的限制-->
+    <task:scheduler id="scheduler" pool-size="2" />
+    <!-- 指定运行的方法和运行时间规则时间
+    task:scheduler/@pool-size：调度线程池的大小，调度线程在被调度任务完成前不会空闲
+    task:scheduled/@cron：cron表达式，注意，若上次任务未完成，即使到了下一次调度时间，任务也不会重复调度 -->
+    <task:scheduled-tasks scheduler="scheduler">
+        <!-- 一秒一次 -->
+        <task:scheduled ref="jobTest" method="jobPrint" cron="*/1 * * * * ?"/>
+        <task:scheduled ref="jobTest" method="jobPrint2" cron="*/1 * * * * ?"/>
+    </task:scheduled-tasks>
+</beans>
