@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 配置web服务的配置 -->
 
-    <!-- http 请求的包 -->
-    <!--<context:component-scan base-package="com.galaxy.fym.action"></context:component-scan>-->
+    <!-- service 请求的包 -->
+    <context:component-scan base-package="com.galaxy.fym.action"></context:component-scan>
 
     <!-- 返回json 方法一 需要导入 fastjson.jar包 -->
     <mvc:annotation-driven>

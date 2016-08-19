@@ -39,7 +39,7 @@
         <!--加载spring的配置-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring-servlert.xml</param-value>
+            <param-value>classpath:/spring/spring-servlert.xml</param-value>
         </init-param>
         <!--设置某项的启动顺序，一般像数据库连接池等模块需要优先启动的，就在web.xml中设置启动优先级。如：
         中间的值越小，优先级就越高-->
