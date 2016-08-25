@@ -1,3 +1,6 @@
 用于研究spring集成quartz的项目
 
-dev分支 1
+该分支测试了如何读取spring里的定时任务的注册中心ScheduledTaskRegistrar，了解了spring会自己注入ContextLifecycleScheduledTaskRegistrar类，不需要自己手动注入，自己手动注入会导致获取不到配置的信息
+
+ScheduledTaskRegistrar里含有cronTasks，可以取到自己配置的定时任务的设置信息
+
