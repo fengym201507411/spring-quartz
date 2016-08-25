@@ -18,10 +18,6 @@
         <task:scheduled ref="jobTest" method="jobPrint2" cron="*/1 * * * * ?"/>
     </task:scheduled-tasks>
 
-    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
-        <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/>
-    </bean>
-
     <bean id="scheduledExecutorFactoryBean" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean"/>
 
 </beans>

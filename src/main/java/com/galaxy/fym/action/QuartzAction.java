@@ -17,22 +17,9 @@ public class QuartzAction {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("setAllJob")
-    @ResponseBody
-    public String setAllJob(){
-        taskService.setAllJob();
-        return "Ok";
-    }
-
     @RequestMapping("print")
     @ResponseBody
     public Object print(){
         return taskService.print();
-    }
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public Object getAll(){
-        return taskService.getAllJob();
     }
 }
