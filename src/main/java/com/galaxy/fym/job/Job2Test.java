@@ -22,14 +22,12 @@ public class Job2Test {
         logger.error("Job2Test error");
     }
 
-    @Scheduled(cron = "*/1 * * * * ?")
     public void jobPrint() throws Exception{
         System.out.println("--------Job2222Test jobPrint11111 thread time：" + new Date().getTime() + "-------------");
         Thread.sleep(2000l);
         System.out.println("--------Job2222Test jobPrint11111 thread time：" + new Date().getTime() + "-------------");
     }
 
-    @Scheduled(cron = "*/1 * * * * ?")
     public void jobPrint2(){
         System.out.println("--------Job2222Test jobPrint22222 time：" + new Date().getTime()+"-------------");
     }
