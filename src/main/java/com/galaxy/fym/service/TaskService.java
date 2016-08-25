@@ -2,16 +2,17 @@ package com.galaxy.fym.service;
 
 import com.galaxy.fym.model.ScheduleJob;
 import org.quartz.*;
-import org.quartz.impl.StdScheduler;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by fengyiming on 2016/8/18.
@@ -24,13 +25,14 @@ public class TaskService {
     private SchedulerFactoryBean schedulerFactoryBean;
 
     @Autowired
-    private StdScheduler stdScheduler;
+    private ScheduledExecutorFactoryBean scheduledExecutorFactoryBean;
 
     public Object print(){
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
             List<String> triggerGroups = scheduler.getTriggerGroupNames();
+
 
             return triggerGroups;
         }catch (Exception e){
@@ -45,7 +47,7 @@ public class TaskService {
      * @return
      * @throws SchedulerException
      */
-    public void getAllJob(){
+    public void setAllJob(){
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
@@ -98,6 +100,42 @@ public class TaskService {
             }
         }catch (Exception e){
 
+        }
+    }
+
+    /**
+     * 获取所有计划中的任务列表
+     *
+     * @return
+     * @throws SchedulerException
+     */
+    public List<ScheduleJob> getAllJob(){
+        try {
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
+            ThreadGroup threadGroup = scheduledExecutorFactoryBean.getThreadGroup();
+            GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
+            Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
+            List<ScheduleJob> jobList = new ArrayList<ScheduleJob>();
+            for (JobKey jobKey : jobKeys) {
+                List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+                for (Trigger trigger : triggers) {
+                    ScheduleJob job = new ScheduleJob();
+                    job.setJobName(jobKey.getName());
+                    job.setJobGroup(jobKey.getGroup());
+                    job.setDesc("触发器:" + trigger.getKey());
+                    Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
+                    job.setJobStatus(triggerState.name());
+                    if (trigger instanceof CronTrigger) {
+                        CronTrigger cronTrigger = (CronTrigger) trigger;
+                        String cronExpression = cronTrigger.getCronExpression();
+                        job.setCronExpression(cronExpression);
+                    }
+                    jobList.add(job);
+                }
+            }
+            return jobList;
+        }catch (Exception e){
+            return null;
         }
     }
 }

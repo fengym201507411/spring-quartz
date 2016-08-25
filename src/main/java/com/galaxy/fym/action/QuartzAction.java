@@ -17,11 +17,10 @@ public class QuartzAction {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("info")
+    @RequestMapping("setAllJob")
     @ResponseBody
-    public String info(){
-        ModelMap modelMap = new ModelMap();
-        taskService.getAllJob();
+    public String setAllJob(){
+        taskService.setAllJob();
         return "Ok";
     }
 
@@ -29,5 +28,11 @@ public class QuartzAction {
     @ResponseBody
     public Object print(){
         return taskService.print();
+    }
+
+    @RequestMapping("getAll")
+    @ResponseBody
+    public Object getAll(){
+        return taskService.getAllJob();
     }
 }

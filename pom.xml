@@ -101,6 +101,7 @@
             <version>${spring.version}</version>
         </dependency>
         <!-- velocity模板类 -->
+        <!-- 含有quartz的类-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>

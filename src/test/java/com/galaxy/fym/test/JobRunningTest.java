@@ -20,6 +20,6 @@ public class JobRunningTest {
 
     @Test
     public void test() throws Exception{
-        taskService.getAllJob();
+        taskService.print();
     }
 }
