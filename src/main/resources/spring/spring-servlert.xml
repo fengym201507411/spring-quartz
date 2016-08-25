@@ -32,9 +32,6 @@
         <property name="suffix" value=".vm" />
         <property name="contentType" value="text/html;charset=utf-8" />
     </bean>
-    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="WEB-INF/view/" />
-    </bean>
     <!--返回jsp文件-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="view/"/>

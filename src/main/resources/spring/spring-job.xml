@@ -17,7 +17,4 @@
         <task:scheduled ref="jobTest" method="jobPrint" cron="*/1 * * * * ?"/>
         <task:scheduled ref="jobTest" method="jobPrint2" cron="*/1 * * * * ?"/>
     </task:scheduled-tasks>
-
-    <bean id="scheduledExecutorFactoryBean" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean"/>
-
 </beans>
